@@ -78,6 +78,7 @@ you want you can enable it, this layer focuses on less Emacs-y bindings.
 | ~C-u~                 | Universal Argument                             |
 | ~C-[0-9]~             | Universal Prefix for [0-9]                     |
 | ~M-m~                 | Spacemacs Leader Key                           |
+| ~s-i~                 | Toggle between line- and char-mode             |
 | ~s-[1 2 3 ... 8 9 0]~ | Switch to workspace [1 2 3 ... 8 9 10]         |
 | ~s-TAB~               | Switch to last workspace                       |
 | ~s-w~                 | Workspace Switch Menu (kinda like micro-state) |
