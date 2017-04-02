@@ -95,28 +95,12 @@
                
 (setq exwm-input-line-mode-passthrough t)
     ;; Pass all keypresses to emacs in line mode
-
-(defun exwm-input-line-mode ()
-    "Set exwm frame to line-mode and show mode line"
-    (call-interactively #'exwm-input-grab-keyboard)
-    (exwm-layout-show-mode-line))
-
-(defun exwm-input-char-mode ()
-    "Set exwm frame to char-mode and hide mode line"
-    (call-interactively #'exwm-input-release-keyboard)
-    (exwm-layout-hide-mode-line))
-
-(defun exwm-input-toggle-mode ()
-    "Toggle between line- and char-mode"
-    (with-current-buffer (window-buffer)
-      (when (eq major-mode 'exwm-mode)
-        (if (equal (second (second mode-line-process)) "line")
-            (exwm-input-char-mode)
-          (exwm-input-line-mode)))))
                
   (exwm-input-set-key (kbd "s-i")
                       (lambda () (interactive)
-                        (exwm-input-toggle-mode)))            
+                        (exwm-input-toggle-keyboard))) 
+               
+               
                
                
 
