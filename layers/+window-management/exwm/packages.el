@@ -91,7 +91,13 @@
                    (string-prefix-p "sun-awt-X11-" exwm-instance-name)
                    (string= "gimp" exwm-instance-name))
            (exwm-workspace-rename-buffer exwm-title))))
-               
+
+    ;;make exwm windows default to char instead of line mode
+    (add-hook 'exwm-manage-finish-hook
+              (lambda () (call-interactively #'exwm-input-release-keyboard)
+                (exwm-layout-hide-mode-line)))
+
+
                
 (setq exwm-input-line-mode-passthrough t)
     ;; Pass all keypresses to emacs in line mode
@@ -117,10 +123,23 @@
   (exwm-input-set-key (kbd "s-i")
                       (lambda () (interactive)
                         (exwm-input-toggle-keyboard))) 
+
+  (exwm-input-set-key (kbd "s-k")
+                      (lambda () (interactive)
+                        (exwm-layout-toggle-mode-line)))
+              
                
                
-               
-               
+
+  (defun toggle-echo-area-visibility ()
+    "Toggle visibility of echo area at the bottom of the screen"
+    (if (equal (frame-pixel-height) (x-display-pixel-height))
+        (set-frame-height nil (+ (x-display-pixel-height) (frame-char-height)) nil t)
+      (set-frame-height nil (x-display-pixel-height) nil t)))
+
+  (exwm-input-set-key (kbd "s-o")
+                      (lambda () (interactive)
+                        (toggle-echo-area-visibility)))
 
     (defvar exwm-workspace-switch-wrap t
       "Whether `spacemacs/exwm-workspace-next' and `spacemacs/exwm-workspace-prev' should wrap.")
