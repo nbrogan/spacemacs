@@ -30,7 +30,7 @@
         (org-mime :location built-in)
         org-pomodoro
         org-present
-        (org-projectile :toggle (configuration-layer/package-usedp 'projectile))
+        (org-projectile :depends projectile)
         (ox-twbs :toggle org-enable-bootstrap-support)
         ;; use a for of ox-gfm to fix index generation
         (ox-gfm :location (recipe :fetcher github :repo "syl20bnr/ox-gfm")
@@ -54,7 +54,10 @@
     :init
     (progn
       (add-hook 'org-mode-hook 'spacemacs//evil-org-mode)
-      (setq evil-org-key-theme '(textobjects navigation additional)))
+      (setq evil-org-key-theme `(textobjects
+                                 navigation
+                                 additional
+                                 ,@(when org-want-todo-bindings '(todo)))))
     :config
     (spacemacs|diminish evil-org-mode " ⓔ" " e")))
 
